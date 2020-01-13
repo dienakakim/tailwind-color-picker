@@ -3,18 +3,44 @@
 
 <head>
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
-
+    <title>Tailwind CSS Color Picker</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-clipboard2@0.3.1/dist/vue-clipboard.min.js"></script>
 </head>
 
-<body debug>
-    <div class="min-h-screen flex flex-col">
-        <div class="bg-red-400 h-32">
-            <div class="text-gray-200 text-6xl flex justify-center items-center align-middle">A</div>
+<body>
+    <div id="app" class="text-gray-200 font-sans font-normal w-screen h-screen flex flex-col overflow-hidden">
+        <div class="text-2xl flex justify-center items-center bg-black flex-1 select-all">bg-black</div>
+        <div class="flex flex-1 text-sm" v-for="color in colors" :="color.id">
+            <div class="flex flex-1" v-for="hue in 9" :="hue.id">
+                <div :class="[huetify(color, hue), visiblify(huetify(color, hue))]"
+                    class="flex flex-1 justify-center items-center select-all" @click="copy(huetify(color, hue))">
+                    {{ huetify(color, hue) }}</div>
+            </div>
         </div>
-        <div class="bg-blue-700 flex-1 flex text-6xl justify-center items-center align-middle text-gray-200">
-            B
-        </div>
+        <div class="text-2xl flex justify-center items-center bg-white text-gray-800 flex-1 select-all">bg-white</div>
     </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    colors: ['gray', 'red', 'orange', 'yellow',
+                        'green', 'teal', 'indigo', 'blue',
+                        'purple', 'pink'
+                    ]
+                }
+            },
+            methods: {
+                huetify: (color, index) => 'bg-' + color + '-' + (index * 100),
+                visiblify: (huetifyOutput) => parseInt(huetifyOutput[huetifyOutput.length - 3]) > 5 ?
+                    'text-gray-200' : 'text-gray-800',
+                copy: function (huetifyOutput) {
+                    return this.$copyText(huetifyOutput);
+                }
+            },
+        });
+    </script>
 </body>
 
 </html>
