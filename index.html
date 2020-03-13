@@ -15,9 +15,19 @@
         <div class="text-2xl flex justify-center items-center bg-black flex-1 select-all">bg-black</div>
         <div class="flex flex-1 text-sm" v-for="color in colors" :="color.id">
             <div class="flex flex-1" v-for="hue in 9" :="hue.id">
-                <div :class="[huetify(color, hue), visiblify(huetify(color, hue))]"
-                    class="flex flex-1 justify-center items-center select-all" @click="copy(huetify(color, hue))">
-                    {{ huetify(color, hue) }}</div>
+                <div :class="['bg-' + huetify(color, hue), visiblify(huetify(color, hue))]"
+                    class="flex flex-col flex-1 justify-center items-center">
+                    <div>
+                        <p class="select-all" @click="copy('bg-' + huetify(color, hue))">
+                            {{ 'bg-' + huetify(color, hue) }}
+                        </p>
+                    </div>
+                    <div class="mt-2">
+                        <p class="select-all" @click="copy('text-' + huetify(color, hue))">
+                            {{ 'text-' + huetify(color, hue) }}
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="text-2xl flex justify-center items-center bg-white text-gray-800 flex-1 select-all">bg-white
@@ -35,7 +45,7 @@
                 }
             },
             methods: {
-                huetify: (color, index) => 'bg-' + color + '-' + (index * 100),
+                huetify: (color, index) => color + '-' + (index * 100),
                 visiblify: (huetifyOutput) => parseInt(huetifyOutput[huetifyOutput.length - 3]) > 5 ?
                     'text-gray-200' : 'text-gray-800',
                 copy: function (huetifyOutput) {
