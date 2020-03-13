@@ -13,7 +13,7 @@
 <body>
     <div id="app" class="text-gray-200 font-sans font-normal w-screen h-screen flex flex-col overflow-hidden">
         <div class="text-2xl flex justify-center items-center bg-black flex-1 select-all">bg-black</div>
-        <div class="flex flex-1 text-sm" v-for="color in colors" :="color.id">
+        <div class="flex flex-1 text-sm" v-for="color in colors" :key="color.id">
             <div class="flex flex-1" v-for="hue in 9" :="hue.id">
                 <div :class="['bg-' + huetify(color, hue), visiblify(huetify(color, hue))]"
                     class="flex flex-col flex-1 justify-center items-center">
