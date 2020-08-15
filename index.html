@@ -6,13 +6,13 @@
 <head>
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
     <title>Tailwind CSS Color Picker</title>
-    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
     <script src="https://unpkg.com/vue-clipboard2@0.3.1/dist/vue-clipboard.min.js"></script>
 </head>
 
 <body>
     <div id="app" class="text-gray-200 font-sans font-normal w-screen h-screen flex flex-col overflow-hidden">
-        <div class="text-2xl flex justify-center items-center bg-black flex-1 select-all">bg-black</div>
+        <div class="text-2xl flex justify-center items-center bg-black flex-1 select-all" @click="copy('bg-black')">bg-black</div>
         <div class="flex flex-1 text-sm" v-for="color in colors" :key="color.id">
             <div class="flex flex-1" v-for="hue in 9" :="hue.id">
                 <div :class="['bg-' + huetify(color, hue), visiblify(huetify(color, hue))]"
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="text-2xl flex justify-center items-center bg-white text-gray-800 flex-1 select-all">bg-white
+        <div class="text-2xl flex justify-center items-center bg-white text-gray-800 flex-1 select-all" @click="copy('bg-white')">bg-white
         </div>
     </div>
     <script>
