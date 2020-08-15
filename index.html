@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div id="app" class="text-gray-200 font-sans font-normal w-screen h-screen flex flex-col overflow-hidden">
+    <div id="app" class="text-gray-200 font-sans font-normal w-screen min-h-screen flex flex-col overflow-hidden">
         <div class="text-2xl flex justify-center items-center bg-black flex-1 select-all" @click="copy('bg-black')">bg-black</div>
         <div class="flex flex-1 text-sm" v-for="color in colors" :key="color.id">
             <div class="flex flex-1" v-for="hue in 9" :="hue.id">
